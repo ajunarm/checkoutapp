@@ -1,56 +1,77 @@
 <?php
+$servername = "tier2checkoutappserver.mysql.database.azure.com";
+$username = "shiftlead";
+$password = "Ch0ose T7e R!ght";
+$database = "tier2equipmentdb";
 
-include_once 'ui/connectdb.php';
+// Create connection
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+echo "Connected to the database successfully!";
+
+// Perform database operations here...
+
+// Close the connection
+$conn->close();
+
 
 // session_start();
 
-if (isset($_POST['btn_login']))
-{
-  $user_email = $_POST['txt_email'];
-  $user_password = $_POST['txt_password'];
+// include_once 'ui/connectdb.php';
 
-  $select = $pdo->prepare("SELECT * FROM tbl_user WHERE useremail = '$user_email' AND userpassword = '$user_password'");
-  $select->execute();
 
-  $row = $select->fetch(PDO::FETCH_ASSOC);
+// if (isset($_POST['btn_login']))
+// {
+//   $user_email = $_POST['txt_email'];
+//   $user_password = $_POST['txt_password'];
 
-  if (is_array($row))
-  {
-    if ($row['useremail'] == $user_email && $row['userpassword'] == $user_password && $row['role'] == 'Admin')
-    {
-      // Admin session successfully logged in
-      $_SESSION['status'] = "Login succesful by Admin";
-      $_SESSION['status_code'] = 'success';
+//   $select = $pdo->prepare("SELECT * FROM tbl_user WHERE useremail = '$user_email' AND userpassword = '$user_password'");
+//   $select->execute();
 
-      header('refresh: 1; url=ui/dashboard.php');
+//   $row = $select->fetch(PDO::FETCH_ASSOC);
 
-      $_SESSION['userid'] = $row['userid'];
-      $_SESSION['username'] = $row['username'];
-      $_SESSION['useremail'] = $row['useremail'];
-      $_SESSION['role'] = $row['role'];
+//   if (is_array($row))
+//   {
+//     if ($row['useremail'] == $user_email && $row['userpassword'] == $user_password && $row['role'] == 'Admin')
+//     {
+//       // Admin session successfully logged in
+//       $_SESSION['status'] = "Login succesful by Admin";
+//       $_SESSION['status_code'] = 'success';
+
+//       header('refresh: 1; url=ui/dashboard.php');
+
+//       $_SESSION['userid'] = $row['userid'];
+//       $_SESSION['username'] = $row['username'];
+//       $_SESSION['useremail'] = $row['useremail'];
+//       $_SESSION['role'] = $row['role'];
       
-    }
-    else if ($row['useremail'] == $user_email && $row['userpassword'] == $user_password && $row['role'] == 'User')
-    {
-      // User session successfully logged in
-      $_SESSION['status'] = "Login succesful by User";
-      $_SESSION['status_code'] ='success';
+//     }
+//     else if ($row['useremail'] == $user_email && $row['userpassword'] == $user_password && $row['role'] == 'User')
+//     {
+//       // User session successfully logged in
+//       $_SESSION['status'] = "Login succesful by User";
+//       $_SESSION['status_code'] ='success';
 
-      header('refresh: 1; url=ui/user.php');
+//       header('refresh: 1; url=ui/user.php');
 
-      $_SESSION['userid'] = $row['userid'];
-      $_SESSION['username'] = $row['username'];
-      $_SESSION['useremail'] = $row['useremail'];
-      $_SESSION['role'] = $row['role'];
-    }
-  }
-  else
-  {
-    // echo $error = "Wrong username or password";
-    $_SESSION['status'] = "Wrong email or password";
-    $_SESSION['status_code'] = 'error';
-  }
-}
+//       $_SESSION['userid'] = $row['userid'];
+//       $_SESSION['username'] = $row['username'];
+//       $_SESSION['useremail'] = $row['useremail'];
+//       $_SESSION['role'] = $row['role'];
+//     }
+//   }
+//   else
+//   {
+//     // echo $error = "Wrong username or password";
+//     $_SESSION['status'] = "Wrong email or password";
+//     $_SESSION['status_code'] = 'error';
+//   }
+// }
 
 ?>
 
@@ -106,11 +127,11 @@ if (isset($_POST['btn_login']))
           </div>
         </div>
         <div class="row">
-          <div class="col-8">
+          <!-- <div class="col-8">
             <div class="icheck-primary">
             <a href="forgot-password.html">Forgot my password?</a>
             </div>
-          </div>
+          </div> -->
           <!-- /.col -->
           <div class="col-4">
 
