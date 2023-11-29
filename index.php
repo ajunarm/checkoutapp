@@ -4,20 +4,25 @@ $username = "shiftlead";
 $password = "Ch0ose T7e R!ght";
 $database = "tier2equipmentdb";
 
+
+
 // Create connection
-$conn = new mysqli($servername, $username, $password, $database);
+// $conn = new mysqli($servername, $username, $password, $database);
+
+// mysqli_ssl_set($conn,NULL,NULL, "/var/www/html/DigiCertGlobalRootCA.crt.pem", NULL, NULL);
+// mysqli_real_connect($conn, $servername, $username, $password, $database, 3306, MYSQLI_CLIENT_SSL);
 
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// if ($conn->connect_error) {
+//     die("Connection failed: " . $conn->connect_error);
+// }
 
-echo "Connected to the database successfully!";
+// echo "Connected to the database successfully!";
 
 // Perform database operations here...
 
 // Close the connection
-$conn->close();
+// $conn->close();
 
 
 // session_start();
