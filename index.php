@@ -1,100 +1,55 @@
 <?php
-// $servername = "tier2flexserver.mysql.database.azure.com";
-// $username = "shiftlead";
-// $password = "Ch0ose T7e R!ght";
-// $database = "tier2checkoutapp_database";
-// $port = "3306";
 
+include_once 'ui/connectdb.php';
+session_start();
 
-// // Create connection
-// $conn = new mysqli($servername, $username, $password, $database);
-
-// mysqli_ssl_set($conn,NULL,NULL, "/var/www/html/DigiCertGlobalRootCA.crt.pem", NULL, NULL);
-// mysqli_real_connect($conn, $servername, $username, $password, $database, 3306, MYSQLI_CLIENT_SSL);
-
-// Check connection
-// if ($conn->connect_error) {
-//     die("Connection failed: " . $conn->connect_error);
-// }
-
-// echo "Connected to the database successfully!";
-
-// Perform database operations here...
-
-// Close the connection
-// $conn->close();
-try 
+if (isset($_POST['btn_login']))
 {
-  $options = array(
-    PDO::MYSQL_ATTR_SSL_CA => 'C:\Users\nwoko\OneDrive\Desktop\DigiCertGlobalRootCA.crt.pem'
-  );
-  $pdo = new PDO('mysql:host=tier2checkoutappserver.mysql.database.azure.com;port=3306;dbname=tier2checkoutschema', 'shiftlead', 'Ch0ose T7e R!ght');
-  // $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch (PDOException $e)
-{
-  echo $e->getMessage();
-}
+  $user_email = $_POST['txt_email'];
+  $user_password = $_POST['txt_password'];
 
-  $select = $pdo->prepare("SELECT * FROM tbl_category");
+  $select = $pdo->prepare("SELECT * FROM tbl_user WHERE useremail = '$user_email' AND userpassword = '$user_password'");
   $select->execute();
 
   $row = $select->fetch(PDO::FETCH_ASSOC);
-  echo $row["category"];
 
+  if (is_array($row))
+  {
+    if ($row['useremail'] == $user_email && $row['userpassword'] == $user_password && $row['role'] == 'Admin')
+    {
+      // Admin session successfully logged in
+      $_SESSION['status'] = "Login succesful by Admin";
+      $_SESSION['status_code'] = 'success';
 
-// session_start();
+      header('refresh: 1; url=ui/dashboard.php');
 
-// include_once 'ui/connectdb.php';
-
-
-// if (isset($_POST['btn_login']))
-// {
-//   $user_email = $_POST['txt_email'];
-//   $user_password = $_POST['txt_password'];
-
-//   $select = $pdo->prepare("SELECT * FROM tbl_user WHERE useremail = '$user_email' AND userpassword = '$user_password'");
-//   $select->execute();
-
-//   $row = $select->fetch(PDO::FETCH_ASSOC);
-
-//   if (is_array($row))
-//   {
-//     if ($row['useremail'] == $user_email && $row['userpassword'] == $user_password && $row['role'] == 'Admin')
-//     {
-//       // Admin session successfully logged in
-//       $_SESSION['status'] = "Login succesful by Admin";
-//       $_SESSION['status_code'] = 'success';
-
-//       header('refresh: 1; url=ui/dashboard.php');
-
-//       $_SESSION['userid'] = $row['userid'];
-//       $_SESSION['username'] = $row['username'];
-//       $_SESSION['useremail'] = $row['useremail'];
-//       $_SESSION['role'] = $row['role'];
+      $_SESSION['userid'] = $row['userid'];
+      $_SESSION['username'] = $row['username'];
+      $_SESSION['useremail'] = $row['useremail'];
+      $_SESSION['role'] = $row['role'];
       
-//     }
-//     else if ($row['useremail'] == $user_email && $row['userpassword'] == $user_password && $row['role'] == 'User')
-//     {
-//       // User session successfully logged in
-//       $_SESSION['status'] = "Login succesful by User";
-//       $_SESSION['status_code'] ='success';
+    }
+    else if ($row['useremail'] == $user_email && $row['userpassword'] == $user_password && $row['role'] == 'User')
+    {
+      // User session successfully logged in
+      $_SESSION['status'] = "Login succesful by User";
+      $_SESSION['status_code'] ='success';
 
-//       header('refresh: 1; url=ui/user.php');
+      header('refresh: 1; url=ui/user.php');
 
-//       $_SESSION['userid'] = $row['userid'];
-//       $_SESSION['username'] = $row['username'];
-//       $_SESSION['useremail'] = $row['useremail'];
-//       $_SESSION['role'] = $row['role'];
-//     }
-//   }
-//   else
-//   {
-//     // echo $error = "Wrong username or password";
-//     $_SESSION['status'] = "Wrong email or password";
-//     $_SESSION['status_code'] = 'error';
-//   }
-// }
+      $_SESSION['userid'] = $row['userid'];
+      $_SESSION['username'] = $row['username'];
+      $_SESSION['useremail'] = $row['useremail'];
+      $_SESSION['role'] = $row['role'];
+    }
+  }
+  else
+  {
+    // echo $error = "Wrong username or password";
+    $_SESSION['status'] = "Wrong email or password";
+    $_SESSION['status_code'] = 'error';
+  }
+}
 
 ?>
 
