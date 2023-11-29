@@ -1,12 +1,15 @@
 <?php
 
-try
-{
-  $pdo = new PDO('mysql:host=tier2checkoutappserver.mysql.database.azure.com;port=3306;dbname=tier2checkoutschema', 'shiftlead', 'Ch0ose T7e R!ght');
-}
-catch (PDOException $e)
-{
+try {
+  $host = getenv('DB_HOSTNAME');
+  $port = getenv('DB_PORT');
+  $dbname = getenv('DB_NAME');
+  $user = getenv('DB_USERNAME');
+  $pass = getenv('DB_PASSWORD');
+
+  $dsn = "mysql:host=$host;port=$port;dbname=$dbname";
+  $pdo = new PDO($dsn, $user, $pass);
+} catch (PDOException $e) {
   echo $e->getMessage();
 }
-
 ?>
