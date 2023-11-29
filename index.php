@@ -28,7 +28,7 @@ try
   $options = array(
     PDO::MYSQL_ATTR_SSL_CA => '/var/www/html/DigiCertGlobalRootCA.crt.pem'
   );
-  $pdo = new PDO('tier2flexserver.mysql.database.azure.com;port=3306;dbname=tier2checkoutapp_database', 'shiftlead', 'Ch0ose T7e R!ght', $options);
+  $pdo = new PDO('host=tier2flexserver.mysql.database.azure.com;port=3306;dbname=tier2checkoutapp_database', 'shiftlead', 'Ch0ose T7e R!ght', $options);
 }
 catch (PDOException $e)
 {
