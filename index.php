@@ -36,6 +36,11 @@ catch (PDOException $e)
   echo $e->getMessage();
 }
 
+  $select = $pdo->prepare("SELECT * FROM tbl_category");
+  $select->execute();
+
+  $row = $select->fetch(PDO::FETCH_ASSOC);
+  echo $row["category"];
 
 
 // session_start();
