@@ -2,7 +2,7 @@
 $servername = "tier2flexserver.mysql.database.azure.com";
 $username = "shiftlead";
 $password = "Ch0ose T7e R!ght";
-$database = "tier2equipmentdb";
+$database = "tier2checkoutapp_database";
 
 
 // Create connection
