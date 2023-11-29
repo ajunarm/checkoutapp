@@ -30,7 +30,7 @@ try {
         // PDO::MYSQL_ATTR_SSL_KEY     => "/path/to/client-key.pem",
     ];
 
-    $dsn = 'mysql:host=tier2checkoutappserver.mysql.database.azure.com';
+    $dsn = 'mysql:host=tier2checkoutappserver.mysql.database.azure.com;dbname=tier2equipmentdb';
     $username = 'shiftlead';
     $password = 'Ch0ose T7e R!ght';
 
