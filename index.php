@@ -1,5 +1,5 @@
 <?php
-$servername = "tier2checkoutappserver.mysql.database.azure.com";
+$servername = "tier2flexserver.mysql.database.azure.com";
 $username = "shiftlead";
 $password = "Ch0ose T7e R!ght";
 $database = "tier2equipmentdb";
