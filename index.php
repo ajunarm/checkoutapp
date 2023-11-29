@@ -3,10 +3,11 @@ $servername = "tier2flexserver.mysql.database.azure.com";
 $username = "shiftlead";
 $password = "Ch0ose T7e R!ght";
 $database = "tier2checkoutapp_database";
+$port = "3306";
 
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $database);
+$conn = new mysqli($servername, $username, $password, $database, $port);
 
 // mysqli_ssl_set($conn,NULL,NULL, "/var/www/html/DigiCertGlobalRootCA.crt.pem", NULL, NULL);
 // mysqli_real_connect($conn, $servername, $username, $password, $database, 3306, MYSQLI_CLIENT_SSL);
