@@ -63,4 +63,4 @@ jobs:
           app-name: 'tier2checkoutapp'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E15C10242B17437EA4777464988F18B3 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B94C60976B204F1286BC19AB9DC6236E }}
