@@ -1,28 +1,40 @@
 <?php
-$servername = "tier2flexserver.mysql.database.azure.com";
-$username = "shiftlead";
-$password = "Ch0ose T7e R!ght";
-$database = "tier2checkoutapp_database";
-$port = "3306";
+// $servername = "tier2flexserver.mysql.database.azure.com";
+// $username = "shiftlead";
+// $password = "Ch0ose T7e R!ght";
+// $database = "tier2checkoutapp_database";
+// $port = "3306";
 
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database, $port);
+// // Create connection
+// $conn = new mysqli($servername, $username, $password, $database);
 
-mysqli_ssl_set($conn,NULL,NULL, "/var/www/html/DigiCertGlobalRootCA.crt.pem", NULL, NULL);
-mysqli_real_connect($conn, $servername, $username, $password, $database, 3306, MYSQLI_CLIENT_SSL);
+// mysqli_ssl_set($conn,NULL,NULL, "/var/www/html/DigiCertGlobalRootCA.crt.pem", NULL, NULL);
+// mysqli_real_connect($conn, $servername, $username, $password, $database, 3306, MYSQLI_CLIENT_SSL);
 
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// if ($conn->connect_error) {
+//     die("Connection failed: " . $conn->connect_error);
+// }
 
-echo "Connected to the database successfully!";
+// echo "Connected to the database successfully!";
 
 // Perform database operations here...
 
 // Close the connection
-$conn->close();
+// $conn->close();
+try 
+{
+  $options = array(
+    PDO::MYSQL_ATTR_SSL_CA => '/var/www/html/DigiCertGlobalRootCA.crt.pem'
+  );
+  $pdo = new PDO('tier2flexserver.mysql.database.azure.com;port=3306;dbname=tier2checkoutapp_database', 'shiftlead', 'Ch0ose T7e R!ght', $options);
+}
+catch (PDOException $e)
+{
+  echo $e->getMessage();
+}
+
 
 
 // session_start();
